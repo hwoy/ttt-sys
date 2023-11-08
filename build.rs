@@ -3,13 +3,14 @@ use std::path::Path;
 fn main() {
     {
         let bindings = bindgen::Builder::default()
-            .header("u-tic-tac-toe/ttt_engine.h")
+            .header("u-tic-tac-toe/ttt.h")
+			.clang_arg("-DBUILT_IN_VARS")
             .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
             .generate()
             .expect("Unable to generate bindings");
 
         bindings
-            .write_to_file("src/ttt_engine.rs")
+            .write_to_file("src/ttt.rs")
             .expect("Couldn't write bindings!");
     }
 
